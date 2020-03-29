@@ -34,7 +34,7 @@ class Player(pygame.sprite.Sprite):
         self.velocity += self.acceleration
         self.position += self.velocity + 0.5 * self.acceleration
 
-        # # "wychodzenie" poza ekran
+        # "wychodzenie" poza ekran
         if self.position.x > settings.window_width:
              self.position.x = 0
         if self.position.x < 0:
