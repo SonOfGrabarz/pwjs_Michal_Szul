@@ -7,6 +7,9 @@ Jest to projekt prostej gry platformowej w Pythonie z wykorzystaniem bliblioteki
 DONE:
 + ogólny szkielet gry (klasa gracza, główna pętla gry itp)
 + podstawowa mechanika gry uwzględniająca fizykę (skakanie, poruszanie się, spadek swobodny)
++ sterowanie (WSAD, spacja)
++ tworzenie obiektów platform, na które wskakuje gracz
+
 # --- #
 
 # --- #
