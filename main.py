@@ -12,12 +12,8 @@ class Game:
         self.running = True
         self.playing = True
 
-
-
     def new(self):
         # start new game, reset game
-        # self.all_sprites = pygame.sprite.Group()
-        # self.player = sprites.Player()
         self.player = sprites.Player()
         self.all_sprites = pygame.sprite.Group()
         self.platforms = pygame.sprite.Group()
@@ -34,6 +30,11 @@ class Game:
         game.run()
 
     def run(self):
+        # testowanie działania liczenia czasu
+        t = sprites.Timer()
+        pygame.time.wait(300)
+        print(t.current())
+
         # game loop
         # self.playing = True
         while self.playing:
@@ -46,7 +47,7 @@ class Game:
     def update(self):
         # game loop - update
         self.all_sprites.update()
-        
+
         collision = pygame.sprite.spritecollide(self.player, self.platforms, False)
 
         if collision:
@@ -56,13 +57,20 @@ class Game:
     def events(self):
         # game loop - events
         # process input (events)
+        keys = pygame.key.get_pressed()
+
         for event in pygame.event.get():
             # quit event
-            if event.type == pygame.QUIT or event.type == pygame.K_ESCAPE:
+            if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
                 # breaking main loop
+                print("Wcisnieto ESC lub zamknięto okno!")
                 if self.playing:
                     self.playing = False
                 self.running = False
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    self.player.jump()
 
     def draw(self):
         # game loop - draw
@@ -78,6 +86,7 @@ class Game:
     def end_screen(self):
         pass
 
+    # "drawing" variables on screen for tests
     def dev_tools(self):
         self.text1 = settings.fontCN.render('Acceleration: {0}'.format(self.player.acceleration * 100), True,
                                             settings.white)
@@ -91,9 +100,13 @@ class Game:
         pygame.display.flip()
 
 
+# "creating game"
 game = Game()
 
+# start screen with menu (probably)
 game.start_screen()
+
+# main loop
 while game.running:
     game.new()
     game.end_screen()

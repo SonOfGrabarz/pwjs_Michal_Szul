@@ -15,6 +15,7 @@ fps = 60
 # player properties
 player_acceleration = 0.2
 player_friction = -0.1   # tarcie
+player_gravity = 0.8
 
 # colors
 white = (255, 255, 255)

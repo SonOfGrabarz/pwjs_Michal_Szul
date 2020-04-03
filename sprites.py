@@ -3,6 +3,7 @@ import pygame
 import settings
 
 # vector with 2 dimensions
+# for 2d variables - velocity, acceleration, position
 vector = pygame.math.Vector2
 
 
@@ -15,11 +16,15 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         # center player sprite in the window
-        self.rect.center = (settings.window_width / 2, settings.window_height / 2)
-
+        self.rect.center = vector(settings.window_width / 2, settings.window_height / 2)
         self.position = vector(settings.window_width / 2, settings.window_height / 2)
         self.velocity = vector(0, 0)
-        self.acceleration = vector(0, 0)
+        self.acceleration = vector(0, settings.player_gravity)
+
+    def jump(self):
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_SPACE]:
+            self.velocity.y = -20
 
     def update(self):
         self.acceleration = vector(0, 0.5)
@@ -56,3 +61,23 @@ class Platform(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+
+
+class Timer():
+    # możliwe, że się przyda
+    def __init__(self):
+        self.time_start = 0
+
+    def start(self):
+        self.time_start = pygame.time.get_ticks()
+
+    def current(self):
+        return (pygame.time.get_ticks() - self.time_start)/1000
+
+
+class Map(Platform, Timer):
+    pass
+
+
+class Lvl1(Map):
+    pass
